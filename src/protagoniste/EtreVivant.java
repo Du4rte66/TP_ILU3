@@ -1,11 +1,12 @@
 package protagoniste;
 
 public abstract class EtreVivant {
+	protected int forceDeVie;
+	protected String nom;
 	protected ZoneDeCombat zoneDeCombat;
 	protected Domaine domaine;
-	protected int forceDeVie;
 	
-	public EtreVivant(int forceDeVie, ZoneDeCombat zoneDeCombat, Domaine domaine) {
+	public EtreVivant(int forceDeVie, String nom, ZoneDeCombat zoneDeCombat, Domaine domaine) {
 		this.zoneDeCombat = zoneDeCombat;
 		this.domaine = domaine;
 		this.forceDeVie = forceDeVie;

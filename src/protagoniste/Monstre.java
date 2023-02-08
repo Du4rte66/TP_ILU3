@@ -6,8 +6,8 @@ public class Monstre<P> extends EtreVivant{
 	P[] attaques;
 
 	@SafeVarargs
-	public Monstre(int forceDeVie, ZoneDeCombat zoneDeCombat, Domaine domaine, P... attaques) {
-		super(forceDeVie, zoneDeCombat, domaine);
+	public Monstre(int forceDeVie, String nom, ZoneDeCombat zoneDeCombat, Domaine domaine, P... attaques) {
+		super(forceDeVie, nom, zoneDeCombat, domaine);
 		this.attaques = attaques;
 	}
 	
