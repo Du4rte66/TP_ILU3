@@ -2,17 +2,16 @@ package protagoniste;
 
 import java.util.Arrays;
 
-public class Monstre extends EtreVivant{
-	private String[] attaques;
+public class Monstre<P> extends EtreVivant{
+	P[] attaques;
 
-	public Monstre(int forceDeVie, ZoneDeCombat zoneDeCombat, Domaine domaine, String... attaques) {
+	@SafeVarargs
+	public Monstre(int forceDeVie, ZoneDeCombat zoneDeCombat, Domaine domaine, P... attaques) {
 		super(forceDeVie, zoneDeCombat, domaine);
 		this.attaques = attaques;
 	}
 	
-	public String[] getAttaques() {
-		return attaques;
-	}
+
 
 	@Override
 	public String toString() {
