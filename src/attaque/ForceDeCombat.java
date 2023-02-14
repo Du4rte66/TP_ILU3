@@ -28,7 +28,9 @@ public abstract class ForceDeCombat {
 
 	@Override
 	public String toString() {
-		return "ForceDeCombat [pointDeDegat=" + pointDeDegat + ", nom=" + nom + ", operationnel=" + operationnel + "]";
+		String chaine = "[" + nom + ", " + pointDeDegat + " DMG, ";
+		chaine += this.operationnel ? "operationnel]" : "non operationnel]";
+		return chaine;
 	}
 	
 	

@@ -3,31 +3,22 @@ package protagoniste;
 public abstract class EtreVivant {
 	protected int forceDeVie;
 	protected String nom;
-	protected ZoneDeCombat zoneDeCombat;
-	protected Domaine domaine;
 	
-	public EtreVivant(int forceDeVie, String nom, ZoneDeCombat zoneDeCombat, Domaine domaine) {
-		this.zoneDeCombat = zoneDeCombat;
-		this.domaine = domaine;
+	public EtreVivant(int forceDeVie, String nom) {
 		this.forceDeVie = forceDeVie;
+		this.nom = nom;
+	}
+	
+	public String getNom() {
+		return nom;
 	}
 	
 	public int getForceDeVie() {
 		return forceDeVie;
 	}
 
-	public ZoneDeCombat getZoneDeCombat() {
-		return this.zoneDeCombat;
-	}
-
-	public Domaine getDomaine() {
-		return this.domaine;
-	}
-
 	@Override
 	public String toString() {
-		return "EtreVivant [zoneDeCombat=" + zoneDeCombat + ", domaine=" + domaine + ", forceDeVie=" + forceDeVie + "]";
+		return "EtreVivant [" + nom + ", " + forceDeVie + " HP]";
 	}
-	
-	
 }
