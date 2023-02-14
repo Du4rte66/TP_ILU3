@@ -8,7 +8,7 @@ public class TestGestionAttaque {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		["lave", "éclairs", "boules de feu"]
-		Monstre dragotenebre = new Monstre(200, ZoneDeCombat.AERIEN, Domaine.FEU, );
+//		Monstre dragotenebre = new Monstre(200, ZoneDeCombat.AERIEN, Domaine.FEU, );
 		
 	}
 
