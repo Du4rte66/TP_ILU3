@@ -19,6 +19,6 @@ public abstract class EtreVivant {
 
 	@Override
 	public String toString() {
-		return "EtreVivant [" + nom + ", " + forceDeVie + " HP]";
+		return "Etre vivant [" + nom + ", " + forceDeVie + " HP, ";
 	}
 }

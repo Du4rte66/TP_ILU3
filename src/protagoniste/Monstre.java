@@ -1,14 +1,17 @@
 package protagoniste;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Iterator;
-
+import java.util.NoSuchElementException;
 import attaque.Pouvoir;
 
 public class Monstre<P extends Pouvoir> extends EtreVivant{
 	private P[] attaques;
 	private ZoneDeCombat zoneDeCombat;
 	private Domaine domaine;
+	private Random rand = new Random();
+	private GestionAttaque gestionAttaque;
 
 	@SafeVarargs
 	public Monstre(int forceDeVie, String nom, ZoneDeCombat zoneDeCombat, Domaine domaine, P... attaques) {
@@ -25,11 +28,24 @@ public class Monstre<P extends Pouvoir> extends EtreVivant{
 	public Domaine getDomaine() {
 		return this.domaine;
 	}
+	
+	public void entreEnCombat() {
+		for(P attaque : attaques) {
+			attaque.regenerPouvoir();
+		}
+		gestionAttaque = new GestionAttaque(attaques);
+	}
+	
+	public P attaque() {
+		return gestionAttaque.next();
+	}
+	
+	
 
 	@Override
 	public String toString() {
-		return super.toString() + " = Monstre [attaques=" + Arrays.toString(attaques) + ", zoneDeCombat=" + zoneDeCombat + ", domaine="
-				+ domaine + "]";
+		return super.toString() + "Monstre [attaques=" + Arrays.toString(attaques) + ", zone de combat=" + zoneDeCombat + ", domaine="
+				+ domaine + "]]";
 	}
 
 	//classe interne
@@ -60,10 +76,11 @@ public class Monstre<P extends Pouvoir> extends EtreVivant{
 
 		@Override
 		public P next() {
-			// TODO Auto-generated method stub
+			if (hasNext()) {
+				return this.attaquesPossibles[rand.nextInt(nbAttaquesPossibles)];
+			}
+			//si le tableau est vide
 			return null;
 		}
-
-
 	}
 }
