@@ -4,7 +4,7 @@ public abstract class Pouvoir extends ForceDeCombat {
 	private int nbUtilisationPouvoir;
 	private int nbUtilisationPouvoirInitial;
 	
-	public Pouvoir(int pointDeDegat, String nom, int nbUtilisationPouvoir) {
+	protected Pouvoir(int pointDeDegat, String nom, int nbUtilisationPouvoir) {
 		super(pointDeDegat, nom);
 		this.nbUtilisationPouvoir = nbUtilisationPouvoir;
 		this.nbUtilisationPouvoirInitial = nbUtilisationPouvoir;
@@ -15,6 +15,7 @@ public abstract class Pouvoir extends ForceDeCombat {
 		this.nbUtilisationPouvoir = this.nbUtilisationPouvoirInitial; //reset nb utilisations pouvoir
 	}
 	
+	@Override
 	public int utiliser() {
 		if(isOperationnel()) {
 			this.nbUtilisationPouvoir--;
@@ -23,6 +24,6 @@ public abstract class Pouvoir extends ForceDeCombat {
 			}
 		}
 		
-		return this.utiliser();
+		return super.utiliser();
 	}
 }

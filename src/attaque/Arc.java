@@ -8,6 +8,7 @@ public class Arc extends Arme {
 		this.nbFlechesRestantes = nbFlechesRestantes;
 	}
 	
+	@Override
 	public int utiliser() {
 		if(isOperationnel()) {
 			nbFlechesRestantes--;

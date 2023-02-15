@@ -4,7 +4,7 @@ public abstract class EtreVivant {
 	protected int forceDeVie;
 	protected String nom;
 	
-	public EtreVivant(int forceDeVie, String nom) {
+	protected EtreVivant(int forceDeVie, String nom) {
 		this.forceDeVie = forceDeVie;
 		this.nom = nom;
 	}
