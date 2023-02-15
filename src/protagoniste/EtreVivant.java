@@ -30,4 +30,13 @@ public abstract class EtreVivant {
 	public void rejointBataille(Bataille bataille) {
 		this.bataille = bataille;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof EtreVivant) {
+			EtreVivant etreVivant = (EtreVivant) obj;
+			return nom.equals(etreVivant.nom);
+		}
+		return false;
+	}
 }
