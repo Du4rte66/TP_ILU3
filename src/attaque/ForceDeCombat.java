@@ -5,7 +5,7 @@ public abstract class ForceDeCombat {
 	private String nom;
 	protected boolean operationnel = true;
 	
-	public ForceDeCombat(int pointDeDegat, String nom) {
+	protected ForceDeCombat(int pointDeDegat, String nom) {
 		this.pointDeDegat = pointDeDegat;
 		this.nom = nom;
 	}

@@ -12,9 +12,10 @@ public class Arc extends Arme {
 	public int utiliser() {
 		if(isOperationnel()) {
 			nbFlechesRestantes--;
-			if(nbFlechesRestantes < 1 ) {
-				operationnel = false;
-			}
+			
+		}
+		if(nbFlechesRestantes < 1 ) {
+			operationnel = false;
 		}
 		
 		return super.utiliser();

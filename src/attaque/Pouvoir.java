@@ -19,11 +19,16 @@ public abstract class Pouvoir extends ForceDeCombat {
 	public int utiliser() {
 		if(isOperationnel()) {
 			this.nbUtilisationPouvoir--;
-			if(this.nbUtilisationPouvoir < 1) {
-				this.operationnel = false;			
-			}
+		}
+		if(this.nbUtilisationPouvoir < 1) {
+			this.operationnel = false;			
+			System.out.println(getNom() + " n'est plus opérationnel");
 		}
 		
 		return super.utiliser();
+	}
+	
+	public int getNbUtilisationPouvoir() {
+		return this.nbUtilisationPouvoir;
 	}
 }
