@@ -3,7 +3,6 @@ package protagoniste;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 import attaque.Pouvoir;
 
 public class Monstre<P extends Pouvoir> extends EtreVivant{
