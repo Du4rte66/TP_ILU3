@@ -4,6 +4,7 @@ import protagoniste.*;
 import attaque.*;
 import bataille.Bataille;
 import bataille.Camp;
+import livre.AideEcrivain;
 
 public class TestGestionAttaque {
 
@@ -47,5 +48,14 @@ public class TestGestionAttaque {
 		System.out.println("**** TP2 ****");
 		System.out.println("\ncamp des humains :\n" + campsHumain);
 		System.out.println("\ncamp des monstres :\n" + campsMonstre); 
-	}
+		
+		AideEcrivain aideEcrivain = new AideEcrivain(bataille);
+		System.out.println("\nvisualisation des forces humaines :\n"
+		 + aideEcrivain.visualiserForcesHumaines());
+		
+		thomas.mourir();
+		System.out.println("\ncamp des humains :\n" + campsHumain);
+		dragotenebre.mourir();
+		System.out.println("\ncamp des monstres :\n" + campsMonstre); 
+		}
 }

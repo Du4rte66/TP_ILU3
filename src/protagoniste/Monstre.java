@@ -72,6 +72,7 @@ public class Monstre<P extends Pouvoir> extends EtreVivant{
 		
 		public boolean hasNext() {
 			int nbPouvoirOperationnel = 0;
+
 			for(int i = nbAttaquesPossibles - 1; i >= 0 ; i--) {
 				if(!attaquesPossibles[i].isOperationnel()) {
 					attaquesPossibles[i] = attaquesPossibles[--nbAttaquesPossibles];
