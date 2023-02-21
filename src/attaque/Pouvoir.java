@@ -22,7 +22,6 @@ public abstract class Pouvoir extends ForceDeCombat {
 		}
 		if(this.nbUtilisationPouvoir < 1) {
 			this.operationnel = false;			
-			System.out.println(getNom() + " n'est plus opérationnel");
 		}
 		
 		return super.utiliser();

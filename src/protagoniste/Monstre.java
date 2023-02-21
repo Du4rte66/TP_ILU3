@@ -39,9 +39,7 @@ public class Monstre<P extends Pouvoir> extends EtreVivant{
 	}
 	
 	public P attaque() {
-		P temp = this.gestionAttaque.next();
-		System.out.println(temp);
-		return temp;
+		return this.gestionAttaque.next();
 	}
 	
 	
@@ -73,17 +71,14 @@ public class Monstre<P extends Pouvoir> extends EtreVivant{
 		}
 		
 		public boolean hasNext() {
-			//TODO transformer for en boucle i -> nbAttaquesPossibles
-			int i = 0;
 			int nbPouvoirOperationnel = 0;
-			for(P attaque : attaquesPossibles) {
-				if(!attaque.isOperationnel()) {
+			for(int i = nbAttaquesPossibles - 1; i >= 0 ; i--) {
+				if(!attaquesPossibles[i].isOperationnel()) {
 					attaquesPossibles[i] = attaquesPossibles[--nbAttaquesPossibles];
 					
 				} else {
 					nbPouvoirOperationnel++;
 				}
-				i++;
 			}
 			return nbPouvoirOperationnel > 0;
 		}
@@ -91,9 +86,8 @@ public class Monstre<P extends Pouvoir> extends EtreVivant{
 		@Override
 		public P next() {
 			if (hasNext()) {
-				System.out.println("Random entre 0 et " + nbAttaquesPossibles);
 				int hasard = rand.nextInt(nbAttaquesPossibles);
-				
+				System.out.println(this.attaquesPossibles[hasard]);
 				return this.attaquesPossibles[hasard];
 			}
 			//si le tableau est vide
