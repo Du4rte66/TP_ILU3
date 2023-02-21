@@ -7,9 +7,9 @@ public abstract class EtreVivant {
 	protected String nom;
 	protected Bataille bataille;
 	
-	protected EtreVivant(int forceDeVie, String nom) {
-		this.forceDeVie = forceDeVie;
+	protected EtreVivant(String nom, int forceDeVie) {
 		this.nom = nom;
+		this.forceDeVie = forceDeVie;
 	}
 	
 	public String getNom() {

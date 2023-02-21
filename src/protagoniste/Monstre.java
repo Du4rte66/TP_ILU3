@@ -16,8 +16,8 @@ public class Monstre<P extends Pouvoir> extends EtreVivant{
 	private GestionAttaque gestionAttaque;
 
 	@SafeVarargs
-	public Monstre(int forceDeVie, String nom, ZoneDeCombat zoneDeCombat, Domaine domaine, P... attaques) {
-		super(forceDeVie, nom);
+	public Monstre(String nom, int forceDeVie, ZoneDeCombat zoneDeCombat, Domaine domaine, P... attaques) {
+		super(nom, forceDeVie);
 		this.zoneDeCombat = zoneDeCombat;
 		this.domaine = domaine;
 		this.attaques = attaques;
@@ -51,7 +51,7 @@ public class Monstre<P extends Pouvoir> extends EtreVivant{
 	
 	@Override
 	public void rejointBataille(Bataille bataille) {
-		this.rejointBataille(bataille);
+		super.rejointBataille(bataille);
 		this.bataille.ajouter(this);
 	}
 	
