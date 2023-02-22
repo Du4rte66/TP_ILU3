@@ -51,11 +51,10 @@ public class TestGestionAttaque {
 		
 		AideEcrivain aideEcrivain = new AideEcrivain(bataille);
 		System.out.println("\nvisualisation des forces humaines :\n"
-		 + aideEcrivain.visualiserForcesHumaines());
+		 + aideEcrivain.visualiserForcesHumaines()); 
 		
-		thomas.mourir();
-		System.out.println("\ncamp des humains :\n" + campsHumain);
-		dragotenebre.mourir();
-		System.out.println("\ncamp des monstres :\n" + campsMonstre); 
+		System.out.println(aideEcrivain.ordreNaturelMonstre());
+		System.out.println(aideEcrivain.ordreMonstreDomaine());
+		System.out.println("\n" + aideEcrivain.updateMonstresDomaine());
 		}
 }
