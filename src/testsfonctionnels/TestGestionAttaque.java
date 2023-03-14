@@ -1,6 +1,7 @@
 package testsfonctionnels;
 
 import protagoniste.*;
+import java.util.NavigableSet;
 import attaque.*;
 import bataille.Bataille;
 import bataille.Camp;
@@ -53,8 +54,79 @@ public class TestGestionAttaque {
 		System.out.println("\nvisualisation des forces humaines :\n"
 		 + aideEcrivain.visualiserForcesHumaines()); 
 		
-		System.out.println(aideEcrivain.ordreNaturelMonstre());
-		System.out.println(aideEcrivain.ordreMonstreDomaine());
-		System.out.println("\n" + aideEcrivain.updateMonstresDomaine());
+		System.out.println("\n**** TP3 ****");
+		System.out.println("\nordre naturel :\n"
+		 + aideEcrivain.ordreNaturelMonstre());
+
+		System.out.println("\nordre par domaine :\n"
+				 + aideEcrivain.ordreMonstreDomaine());
+		
+		System.out.println("\nordre par zone de combat :\n"
+				 + aideEcrivain.ordreMonstreZone());
+		
+		System.out.println(aideEcrivain.firstMonstreDomaine(Domaine.TRANCHANT));
+	
+		aideEcrivain.initMonstresDeFeu();
+		NavigableSet<Monstre<?>> monstres = aideEcrivain.getMonstresDeFeu();
+		String affichage = affichageMonstres(monstres);
+		System.out.println("\nmonstres de feu 1 :\n" + affichage);
+		
+		Monstre<Glace> soufflemort = new Monstre<>("soufflemort", 120,
+			ZoneDeCombat.AERIEN, Domaine.GLACE, new Tornade(8));
+		Monstre<Feu> cramombre = new Monstre<>("cramombre", 80,
+			ZoneDeCombat.TERRESTRE, Domaine.FEU, new BouleDeFeu(2), new Lave(1), new Eclair(1));
+		soufflemort.rejointBataille(bataille);
+		cramombre.rejointBataille(bataille); 
+		
+		aideEcrivain.initMonstresDeFeu();
+		monstres = aideEcrivain.getMonstresDeFeu();
+		affichage = affichageMonstres(monstres);
+		System.out.println("\nmonstres de feu 2 :\n" + affichage); 
+		
+		Monstre<Glace> givrogolem = new Monstre<>("givrogolem", 200,
+			ZoneDeCombat.TERRESTRE, Domaine.GLACE, new PicsDeGlace(10), new Tornade(1));
+		givrogolem.rejointBataille(bataille);
+		aideEcrivain.initMonstresDeFeu();
+		monstres = aideEcrivain.getMonstresDeFeu();
+		affichage = affichageMonstres(monstres);
+		System.out.println("\nmonstres de feu 3 :\n" + affichage); 
+		
+		Monstre<Feu> aqualave = new Monstre<>("aqualave", 30,
+		 ZoneDeCombat.AQUATIQUE, Domaine.FEU, new Lave(5));
+		Monstre<Tranchant> requispectre = new Monstre<>("requispectre", 200,
+		 ZoneDeCombat.AQUATIQUE, Domaine.TRANCHANT, new Griffe());
+		
+		aqualave.rejointBataille(bataille);
+		requispectre.rejointBataille(bataille);
+		aideEcrivain.initMonstresDeFeu();
+		aideEcrivain.initMonstresDeGlace();
+		aideEcrivain.initMonstresTranchant();
+		
+		monstres = aideEcrivain.getMonstresDeFeu();
+		affichage = affichageMonstres(monstres);
+		System.out.println("\nmonstres de feu :\n" + affichage);
+		monstres = aideEcrivain.getMonstresDeGlace();
+		affichage = affichageMonstres(monstres);
+		System.out.println("\nmonstres de glace :\n" + affichage);
+		monstres = aideEcrivain.getMonstresTranchants();
+		affichage = affichageMonstres(monstres);
+		System.out.println("\nmonstres tranchants :\n" + affichage);
+		
+		
+		
+		
+		
+		
+	
+	}
+	
+	public static String affichageMonstres(NavigableSet<Monstre<?>> monstres) {
+		String texte = "";
+		for (Monstre<?> monstre : monstres) {
+			texte += monstre.getNom() + " monstre de " + monstre.getDomaine() + ", ";
 		}
+		return texte;
+	}
+	
+	
 }
