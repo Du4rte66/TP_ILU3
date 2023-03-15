@@ -1,6 +1,8 @@
 package testsfonctionnels;
 
 import protagoniste.*;
+
+import java.util.Iterator;
 import java.util.NavigableSet;
 import attaque.*;
 import bataille.Bataille;
@@ -122,6 +124,11 @@ public class TestGestionAttaque {
 	
 	public static String affichageMonstres(NavigableSet<Monstre<?>> monstres) {
 		String texte = "";
+//		TODO
+//		for (Iterator iterator = monstres.iterator(); iterator.hasNext();) {
+//			Monstre<?> monstre = (Monstre<?>) iterator.next();
+//			
+//		}
 		for (Monstre<?> monstre : monstres) {
 			texte += monstre.getNom() + " monstre de " + monstre.getDomaine() + ", ";
 		}

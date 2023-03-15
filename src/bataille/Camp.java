@@ -2,6 +2,8 @@ package bataille;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Random;
+
 import protagoniste.EtreVivant;
 
 public class Camp<E extends EtreVivant> implements Iterable<E> {
@@ -27,5 +29,15 @@ public class Camp<E extends EtreVivant> implements Iterable<E> {
 	@Override
 	public Iterator<E> iterator() {
 		return liste.iterator();
+	}
+	
+	public int nbCombattants() {
+		  return liste.size();
+		}
+
+	public E selectionner() {
+		Random randomGenerateur = new Random();
+		int numeroCombattant = randomGenerateur.nextInt(liste.size());
+		return liste.get(numeroCombattant);
 	}
 }
