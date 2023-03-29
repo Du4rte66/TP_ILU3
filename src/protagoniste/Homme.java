@@ -1,8 +1,21 @@
 package protagoniste;
 
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.NavigableSet;
+import java.util.Set;
+import java.util.TreeSet;
+
+import attaque.Arme;
+import attaque.KeyArme;
 import bataille.Bataille;
 
 public class Homme extends EtreVivant{
+	private Map<ZoneDeCombat, List<Arme>> armes = new EnumMap<>(ZoneDeCombat.class);
+	private Arme armeChoisie;
+	
 	public Homme(String nom) {
 		super(nom, 70);
 	}
@@ -23,5 +36,67 @@ public class Homme extends EtreVivant{
 		return "Homme [nom=" + nom + ", force de vie=" + forceDeVie + "]";
 	}
 	
+	public void ajouterArmes(Arme... armes) {
+		Set<ZoneDeCombat> zonesDeCombat;
+		List<Arme> liste;
+		
+		for (Arme arme : armes) {
+			zonesDeCombat = arme.getZonesDeCombat();
+			for (ZoneDeCombat zoneDeCombat : zonesDeCombat) {
+				liste = new ArrayList<>();
+				if (this.armes.containsKey(zoneDeCombat)) {
+					liste = this.armes.get(zoneDeCombat);
+				} else {
+					this.armes.put(zoneDeCombat, liste);
+				}
+				liste.add(arme);
+			}
+		}
+	}
 	
+	public void supprimerArme(Arme arme) {
+		Set<ZoneDeCombat> zonesDeCombat = arme.getZonesDeCombat();
+		List<Arme> liste;
+		
+		for (ZoneDeCombat zoneDeCombat : zonesDeCombat) {
+			liste = this.armes.get(zoneDeCombat);
+			if (liste.contains(arme)) {
+				liste.remove(arme);
+			}
+		}
+	}
+
+	public Arme getArmeChoisie() {
+		return armeChoisie;
+	}
+	
+	public Arme choisirArme(Monstre<?> monstre) {
+		ZoneDeCombat zoneMonstre = monstre.getZoneDeCombat();
+		if (armes.containsKey(zoneMonstre)) {
+			List<Arme> armesAdequates = this.armes.get(zoneMonstre);
+			NavigableSet<Arme> armesTriees = new TreeSet<>(armesAdequates);
+
+			if (!armesTriees.isEmpty()) {
+
+				int forceVie = monstre.getForceDeVie();
+				NavigableSet<Arme> armesAdaptees = armesTriees.tailSet(new KeyArme(forceVie), true);
+
+				if (!armesAdaptees.isEmpty()) {
+					this.armeChoisie = armesAdaptees.pollFirst();
+				} else {
+					this.armeChoisie = armesTriees.pollLast();
+				}
+			}
+		}
+			
+		return this.armeChoisie;
+	}
+	
+	@Override
+	public int compareTo(EtreVivant hommeToCompare) {
+		if (hommeToCompare instanceof Homme) {
+			return this.getNom().compareTo(hommeToCompare.getNom());
+		}
+		return -99;
+	}
 }
