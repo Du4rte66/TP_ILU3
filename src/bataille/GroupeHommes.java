@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.Iterator;
-
 import attaque.Arme;
+import attaque.Pouvoir;
 import protagoniste.Homme;
 import protagoniste.Monstre;
 
@@ -21,10 +22,6 @@ public class GroupeHommes {
 	}
 	
 	private static class ComparateurHommes implements Comparator<Homme>{
-        public ComparateurHommes() {
-            super();
-        }
-
         public int compare(Homme homme1, Homme homme2) {
             int comp = homme2.getForceDeVie() - homme1.getForceDeVie();
             if (comp == 0) {
@@ -64,37 +61,35 @@ public class GroupeHommes {
     }
 	
 	public List<Homme> choixDuCamp(Bataille bataille) {
-		Monstre<?> monstre = bataille.getCampMonstres().selectionner();
-	    List<Homme> liste = new ArrayList<>();
-	    TreeMap <Arme, NavigableSet<Homme>> hommesArmes = new TreeMap<>(new ComparateurArmes(monstre));
-	    
-	    for(Homme homme : this.groupe) {
-	    	homme.choisirArme(monstre);
-	        if(homme.getArmeChoisie() != null && hommesArmes.containsKey(homme.getArmeChoisie())) {
-	        	hommesArmes.get(homme.getArmeChoisie()).add(homme);
-	        }
-	        
-	        else if(homme.getArmeChoisie() != null && !hommesArmes.containsKey(homme.getArmeChoisie())) {
-	        	NavigableSet<Homme> ensemble = new TreeSet<>();
-	            ensemble.add(homme);
-	            hommesArmes.put(homme.getArmeChoisie(), ensemble);
-	        }
-	    }
-	        
-	    Iterator<Arme> iterateurArme = hommesArmes.keySet().iterator(); 
-	    while(iterateurArme.hasNext() && liste.size() < 3) {
-	    	Arme arme = iterateurArme.next();
-	        Iterator<Homme> iterateurHomme = groupe.iterator();
-	        while(iterateurHomme.hasNext() && liste.size()<3) {
-	        	Homme homme = iterateurHomme.next();
-	            if(homme.choisirArme(monstre).equals(arme)) {
-	            	liste.add(homme);
-	            }
-	        }
-	    }
-	           
-	    Collections.sort(liste, new ComparateurHommes());
-	    return liste;
+		Monstre<? extends Pouvoir> monstre = bataille.getCampMonstres().selectionner();
+		NavigableMap<Arme, NavigableSet<Homme>> hommesArmes = new TreeMap<>(new ComparateurArmes(monstre));
+		
+		for (Homme homme : groupe) {
+			Arme arme = homme.choisirArme(monstre);
+			if (arme != null) {
+				if (!hommesArmes.containsKey(arme)) {
+					hommesArmes.put(arme, new TreeSet<Homme>(new ComparateurHommes()));
+				}
+				hommesArmes.get(arme).add(homme);
+			}
+		}
+		return extracted(bataille, hommesArmes);
 	}
-	
+
+	private List<Homme> extracted(Bataille bataille, NavigableMap<Arme, NavigableSet<Homme>> hommesArmes) {
+		List<Homme> hommesChoisis = new ArrayList<>();
+		
+		while (hommesChoisis.size() < 3 && !hommesArmes.isEmpty()) {
+			for (Homme homme : hommesArmes.get(hommesArmes.firstKey())) {
+				if (hommesChoisis.size() < 3) {
+					hommesChoisis.add(homme);
+					homme.rejointBataille(bataille);
+					bataille.ajouter(homme);
+				}
+			}
+			hommesArmes.remove(hommesArmes.firstKey());
+		}
+		
+		return hommesChoisis;
+	}
 }

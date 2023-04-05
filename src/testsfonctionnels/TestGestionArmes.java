@@ -58,7 +58,7 @@ public class TestGestionArmes {
 
 		bataille.eliminer(vampirien1);
 		bataille.ajouter(guillotimort);
-		List<Homme> campHomme3 = compagnie.choixDuCamp(bataille); 
+		List<Homme> campHomme3 = compagnie.choixDuCamp(bataille);
 		System.out.println("Le camps des hommes pour combattre un guillotimort (Terrestre, 80) : \n" + campHomme3);
 	}
 //		RESULTAT ATTENDU
