@@ -53,7 +53,7 @@ public class GroupeHommes {
                 if (meilleurArme == null) {
                     meilleurArme = classementForce.get(monstre.getForceDeVie());
                 }
-                if (meilleurArme.equals(arme1)) {
+                if (meilleurArme == arme1) {
                     return -1;
                 }
                 else {
