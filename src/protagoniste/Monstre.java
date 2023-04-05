@@ -60,7 +60,6 @@ public class Monstre<P extends Pouvoir> extends EtreVivant{
 		this.bataille.eliminer(this);
 	}
 
-	//classe interne
 	private class GestionAttaque implements Iterator<P> {
 		private P[] attaquesPossibles;
 		private int nbAttaquesPossibles;

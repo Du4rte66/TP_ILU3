@@ -1,17 +1,18 @@
 package bataille;
 
+import attaque.Pouvoir;
 import protagoniste.Homme;
 import protagoniste.Monstre;
 
 public class Bataille {
 	private Camp<Homme> campHumains  = new Camp<>();
-	private Camp<Monstre<?>> campMonstres  = new Camp<>();
+	private Camp<Monstre<? extends Pouvoir>> campMonstres  = new Camp<>();
 	
 	public void ajouter(Homme homme) {
 		campHumains.ajouter(homme);
 	}
 	
-	public void ajouter(Monstre<?> monstre) {
+	public void ajouter(Monstre<? extends Pouvoir> monstre) {
 		campMonstres.ajouter(monstre);
 	}
 	
@@ -19,7 +20,7 @@ public class Bataille {
 		campHumains.eliminer(homme);
 	}
 	
-	public void eliminer(Monstre<?> monstre) {
+	public void eliminer(Monstre<? extends Pouvoir> monstre) {
 		campMonstres.eliminer(monstre);
 	}
 
@@ -28,7 +29,7 @@ public class Bataille {
 	}
 
 
-	public Camp<Monstre<?>> getCampMonstres() {
+	public Camp<Monstre<? extends Pouvoir>> getCampMonstres() {
 		return campMonstres;
 	}
 }

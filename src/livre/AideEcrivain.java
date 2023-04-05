@@ -8,6 +8,7 @@ import java.util.ListIterator;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 import attaque.Glace;
+import attaque.Pouvoir;
 import attaque.Tranchant;
 import bataille.Bataille;
 import bataille.Camp;
@@ -20,8 +21,8 @@ import protagoniste.ZoneDeCombat;
 
 public class AideEcrivain {
 	Bataille bataille;
-	private NavigableSet<Monstre<?>> monstresDomaineSet = new TreeSet<>(new Comparator<Monstre<?>>() {
-		public int compare(Monstre<?> monstre1, Monstre<?> monstre2) {
+	private NavigableSet<Monstre<? extends Pouvoir>> monstresDomaineSet = new TreeSet<>(new Comparator<Monstre<? extends Pouvoir>>() {
+		public int compare(Monstre<? extends Pouvoir> monstre1, Monstre<? extends Pouvoir> monstre2) {
 			int comparaison = monstre1.getDomaine().compareTo(monstre2.getDomaine());
 			if (comparaison == 0) {
 				comparaison = monstre1.getNom().compareTo(monstre2.getNom());
@@ -30,8 +31,8 @@ public class AideEcrivain {
 		}
 	});
 
-	private NavigableSet<Monstre<?>> monstresZoneSet = new TreeSet<>(new Comparator<Monstre<?>>() {
-		public int compare(Monstre<?> monstre1, Monstre<?> monstre2) {
+	private NavigableSet<Monstre<? extends Pouvoir>> monstresZoneSet = new TreeSet<>(new Comparator<Monstre<? extends Pouvoir>>() {
+		public int compare(Monstre<? extends Pouvoir> monstre1, Monstre<? extends Pouvoir> monstre2) {
 			int comparaison = monstre1.getZoneDeCombat().compareTo(monstre2.getZoneDeCombat());
 			if (comparaison == 0) {
 				Integer forceMonstre1 = monstre1.getForceDeVie();
@@ -44,11 +45,11 @@ public class AideEcrivain {
 		}
 	});
 
-	private NavigableSet<Monstre<?>> monstresDeFeu;
+	private NavigableSet<Monstre<? extends Pouvoir>> monstresDeFeu;
 
-	private NavigableSet<Monstre<?>> monstresDeGlace;
+	private NavigableSet<Monstre<? extends Pouvoir>> monstresDeGlace;
 
-	private NavigableSet<Monstre<?>> monstresTranchants;
+	private NavigableSet<Monstre<? extends Pouvoir>> monstresTranchants;
 
 	public AideEcrivain(Bataille bataille) {
 		this.bataille = bataille;
@@ -86,25 +87,25 @@ public class AideEcrivain {
 	}
 
 	public NavigableSet<String> ordreNaturelMonstre() {
-		Camp<Monstre<?>> campMonstres = bataille.getCampMonstres();
+		Camp<Monstre<? extends Pouvoir>> campMonstres = bataille.getCampMonstres();
 		NavigableSet<String> res = new TreeSet<>();
 
-		for (Monstre<?> monstre : campMonstres) {
+		for (Monstre<? extends Pouvoir> monstre : campMonstres) {
 			res.add(monstre.getNom());
 		}
 
 		return res;
 	}
 
-	public NavigableSet<Monstre<?>> updateMonstresDomaine() {
-		for (Monstre<?> monstre : bataille.getCampMonstres()) {
+	public NavigableSet<Monstre<? extends Pouvoir>> updateMonstresDomaine() {
+		for (Monstre<? extends Pouvoir> monstre : bataille.getCampMonstres()) {
 			monstresDomaineSet.add(monstre);
 		}
 		return monstresDomaineSet;
 	}
 
-	public NavigableSet<Monstre<?>> updateMonstresZone() {
-		for (Monstre<?> monstre : bataille.getCampMonstres()) {
+	public NavigableSet<Monstre<? extends Pouvoir>> updateMonstresZone() {
+		for (Monstre<? extends Pouvoir> monstre : bataille.getCampMonstres()) {
 			monstresZoneSet.add(monstre);
 		}
 		return monstresZoneSet;
@@ -119,7 +120,7 @@ public class AideEcrivain {
 		for (Domaine domaine : domaines) {
 			texte += domaine + " :\n";
 			tempMonstre = false;
-			for (Monstre<?> monstre : monstresDomaineSet) {
+			for (Monstre<? extends Pouvoir> monstre : monstresDomaineSet) {
 				if (monstre.getDomaine() == domaine) {
 					if (tempMonstre == true) {
 						texte += ", ";
@@ -142,7 +143,7 @@ public class AideEcrivain {
 		for (ZoneDeCombat zoneDeCombat : zones) {
 			texte += zoneDeCombat + " :\n";
 			tempMonstre = false;
-			for (Monstre<?> monstre : monstresZoneSet) {
+			for (Monstre<? extends Pouvoir> monstre : monstresZoneSet) {
 				if (monstre.getZoneDeCombat() == zoneDeCombat) {
 					if (tempMonstre == true) {
 						texte += ", ";
@@ -156,20 +157,20 @@ public class AideEcrivain {
 		return texte;
 	}
 
-	public NavigableSet<Monstre<?>> getMonstresDeFeu() {
+	public NavigableSet<Monstre<? extends Pouvoir>> getMonstresDeFeu() {
 		return monstresDeFeu;
 	}
 
-	public NavigableSet<Monstre<?>> getMonstresDeGlace() {
+	public NavigableSet<Monstre<? extends Pouvoir>> getMonstresDeGlace() {
 		return monstresDeGlace;
 	}
 
-	public NavigableSet<Monstre<?>> getMonstresTranchants() {
+	public NavigableSet<Monstre<? extends Pouvoir>> getMonstresTranchants() {
 		return monstresTranchants;
 	}
 
-	public Monstre<?> firstMonstreDomaine(Domaine domaine) {
-		for (Monstre<?> monstre : monstresDomaineSet) {
+	public Monstre<? extends Pouvoir> firstMonstreDomaine(Domaine domaine) {
+		for (Monstre<? extends Pouvoir> monstre : monstresDomaineSet) {
 			if (monstre.getDomaine() == domaine) {
 				return monstre;
 			}

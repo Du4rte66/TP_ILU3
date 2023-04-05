@@ -72,8 +72,8 @@ public class Grotte {
 	public void configurerAcces(int numSalleOrgine, int... numSallesAcces) {
 		Salle origine = trouverSalle(numSalleOrgine);
 		List<Salle> sallesAccesibles = planGrotte.get(origine);
-		for(int x : numSallesAcces) {
-			sallesAccesibles.add(trouverSalle(x));
+		for(int salle : numSallesAcces) {
+			sallesAccesibles.add(trouverSalle(salle));
 		}
 	}
 

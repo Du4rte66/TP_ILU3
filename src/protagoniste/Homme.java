@@ -88,7 +88,6 @@ public class Homme extends EtreVivant{
 				}
 			}
 		}
-			
 		return this.armeChoisie;
 	}
 	
