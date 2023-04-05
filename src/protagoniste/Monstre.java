@@ -39,7 +39,10 @@ public class Monstre<P extends Pouvoir> extends EtreVivant{
 	}
 	
 	public P attaque() {
-		return this.gestionAttaque.next();
+		if(gestionAttaque.hasNext()) {
+			return gestionAttaque.next();
+		}
+		return null;
 	}
 	
 	
@@ -87,7 +90,6 @@ public class Monstre<P extends Pouvoir> extends EtreVivant{
 		public P next() {
 			if (hasNext()) {
 				int hasard = rand.nextInt(nbAttaquesPossibles);
-				System.out.println(this.attaquesPossibles[hasard]);
 				return this.attaquesPossibles[hasard];
 			}
 			//si le tableau est vide
