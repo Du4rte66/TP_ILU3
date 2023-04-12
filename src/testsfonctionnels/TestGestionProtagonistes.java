@@ -111,7 +111,7 @@ public class TestGestionProtagonistes {
 
 		monstres = aideEcrivain.getMonstresTranchants();
 		affichage = affichageMonstres(monstres);
-		System.out.println("\nmonstres tranchant :\n" + affichage);
+		System.out.println("\nmonstres tranchant :\n" + affichage); 
 
 	}
 
