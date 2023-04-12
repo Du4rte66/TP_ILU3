@@ -12,6 +12,7 @@ import attaque.LameAcier;
 import attaque.Lave;
 import attaque.Morsure;
 import attaque.PicsDeGlace;
+import attaque.Pouvoir;
 import attaque.Tornade;
 import attaque.Tranchant;
 import bataille.Bataille;
@@ -52,7 +53,7 @@ public class TestGestionProtagonistes {
 		guillotimort.rejointBataille(bataille);
 
 		Camp<Homme> campsHumain = bataille.getCampHumains();
-		Camp<Monstre<?>> campsMonstre = bataille.getCampMonstres();
+		Camp<Monstre<? extends Pouvoir>> campsMonstre = bataille.getCampMonstres();
 
 		System.out.println("**** TP2 ****");
 		System.out.println("\ncamps des humains :\n" + campsHumain);
@@ -67,7 +68,7 @@ public class TestGestionProtagonistes {
 		System.out.println("\nordre par zone de combat :\n" + aideEcrivain.ordreMonstreZone());
 
 		aideEcrivain.initMonstresDeFeu();
-		NavigableSet<Monstre<?>> monstres = aideEcrivain.getMonstresDeFeu();
+		NavigableSet<Monstre<? extends Pouvoir>> monstres = aideEcrivain.getMonstresDeFeu();
 		String affichage = affichageMonstres(monstres);
 		System.out.println("\nmonstres de feu :\n" + affichage);
 
@@ -115,10 +116,10 @@ public class TestGestionProtagonistes {
 
 	}
 
-	public static String affichageMonstres(NavigableSet<Monstre<?>> monstres) {
+	public static String affichageMonstres(NavigableSet<Monstre<? extends Pouvoir>> monstres) {
 		StringBuilder affichage = new StringBuilder();
-		for (Iterator<Monstre<?>> iterator = monstres.iterator(); iterator.hasNext();) {
-			Monstre<?> monstre = iterator.next();
+		for (Iterator<Monstre<? extends Pouvoir>> iterator = monstres.iterator(); iterator.hasNext();) {
+			Monstre<? extends Pouvoir> monstre = iterator.next();
 			affichage.append(monstre.getNom() + " monstre de " + monstre.getDomaine());
 			if (iterator.hasNext()) {
 				affichage.append(", ");
