@@ -6,7 +6,7 @@ import protagoniste.Monstre;
 
 public class Bataille {
 	private Camp<Homme> campHumains  = new Camp<>();
-	private Camp<Monstre<? extends Pouvoir>> campMonstres  = new Camp<>();
+	private Camp<Monstre<? extends Pouvoir>> campMonstres = new Camp<>();
 	
 	public void ajouter(Homme homme) {
 		campHumains.ajouter(homme);
@@ -27,7 +27,6 @@ public class Bataille {
 	public Camp<Homme> getCampHumains() {
 		return campHumains;
 	}
-
 
 	public Camp<Monstre<? extends Pouvoir>> getCampMonstres() {
 		return campMonstres;

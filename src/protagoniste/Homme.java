@@ -92,6 +92,20 @@ public class Homme extends EtreVivant{
 	}
 	
 	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof EtreVivant) {
+			Homme homme = (Homme) obj;
+			return nom.equals(homme.nom);
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return 31 * (this.forceDeVie + this.nom.hashCode() + this.bataille.hashCode()); 
+	}
+	
+	@Override
 	public int compareTo(EtreVivant hommeToCompare) {
 		if (hommeToCompare instanceof Homme) {
 			return this.getNom().compareTo(hommeToCompare.getNom());

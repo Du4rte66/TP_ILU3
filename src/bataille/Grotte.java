@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import attaque.Pouvoir;
 import protagoniste.Monstre;
 import protagoniste.ZoneDeCombat;
 
@@ -17,15 +18,17 @@ public class Grotte {
 	private Map<Salle, Bataille> batailles = new HashMap<>();
 	private Set<Salle> sallesExplorees = new HashSet<>();
 	private int numeroSalleDecisive;
+	private Random rand = new Random();
 	
-	
-	public void ajouterSalle(ZoneDeCombat zoneDeCombat, Monstre<?>... monstre) {
+	@SuppressWarnings("unchecked")
+	public void ajouterSalle(ZoneDeCombat zoneDeCombat, Monstre<? extends Pouvoir>... monstre) {
 		Salle newSalle = new Salle(planGrotte.size() + 1, zoneDeCombat);
 		Bataille newBataille = new Bataille();
-		for(Monstre<?> m : monstre) {
+		
+		for(Monstre<? extends Pouvoir> m : monstre) {
 			newBataille.ajouter(m);
 		}
-		planGrotte.put(newSalle, new ArrayList<Salle>());
+		planGrotte.put(newSalle, new ArrayList<>());
 		batailles.put(newSalle, newBataille);
 		
 	}
@@ -36,24 +39,32 @@ public class Grotte {
 			  Salle salle = entry.getKey();
 			  List<Salle> acces = planGrotte.get(salle);
 			  affichage.append("La " + salle + ".\nelle possede " + acces.size() + " acces : ");
+			  
 			  for (Salle access : acces) {
 				  affichage.append(" vers la salle " + access);
 			  }
-			  Bataille bataille = batailles.get(salle);
-			  Camp<Monstre<?>> camp = bataille.getCampMonstres();
-			  Monstre<?> monstre = camp.selectionner();
-			  if (camp.nbCombattants() > 1) {
-				  affichage.append("\n" + camp.nbCombattants() + " monstres de type ");
-			  } else {
-				  affichage.append("\nUn monstre de type ");
-			  }
-			  affichage.append(monstre.getNom() + " la protege.\n");
-			  if (salle.getNumSalle() == numeroSalleDecisive) {
-				  affichage.append("C'est dans cette salle que se trouve la pierre de sang.\n");
-			  }
-			  affichage.append("\n");
+			  extracted(affichage, salle);
 		  }
 		  return affichage.toString();
+	}
+
+	private void extracted(StringBuilder affichage, Salle salle) {
+		Bataille bataille = batailles.get(salle);
+		Camp<Monstre<? extends Pouvoir>> camp = bataille.getCampMonstres();
+		Monstre<? extends Pouvoir> monstre = camp.selectionner();
+		
+		if (camp.nbCombattants() > 1) {
+			affichage.append("\n" + camp.nbCombattants() + " monstres de type ");
+		} else {
+			affichage.append("\nUn monstre de type ");
+		}
+		affichage.append(monstre.getNom() + " la protege.\n");
+		
+		if (salle.getNumSalle() == numeroSalleDecisive) {
+			affichage.append("C'est dans cette salle que se trouve la pierre de sang.\n");
+		}
+		
+		affichage.append("\n");
 	}
 	
 	private Salle trouverSalle(int numeroSalle) {
@@ -72,6 +83,7 @@ public class Grotte {
 	public void configurerAcces(int numSalleOrgine, int... numSallesAcces) {
 		Salle origine = trouverSalle(numSalleOrgine);
 		List<Salle> sallesAccesibles = planGrotte.get(origine);
+		
 		for(int salle : numSallesAcces) {
 			sallesAccesibles.add(trouverSalle(salle));
 		}
@@ -97,11 +109,11 @@ public class Grotte {
 		List<Salle> salleAccessible = new ArrayList<>(planGrotte.get(salleAQuitter));
 		List<Salle> sallePossible = new ArrayList<>(salleAccessible);
 		sallePossible.removeAll(sallesExplorees);
+		
 		if(sallePossible.isEmpty()) {
 			sallePossible.addAll(salleAccessible);
 		}
-		Random rand = new Random();
-		int val = rand.nextInt(sallePossible.size());
+		int val = this.rand.nextInt(sallePossible.size());
 		Salle salleT = sallePossible.get(val);
 		sallesExplorees.add(salleT);
 		
