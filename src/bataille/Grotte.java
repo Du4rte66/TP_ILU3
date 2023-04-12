@@ -12,6 +12,7 @@ import java.util.Set;
 import attaque.Pouvoir;
 import protagoniste.Monstre;
 import protagoniste.ZoneDeCombat;
+import protagoniste.ZoneDeCombatNonCompatibleException;
 
 public class Grotte {
 	private Map<Salle, List<Salle>> planGrotte = new LinkedHashMap<>();
@@ -20,13 +21,17 @@ public class Grotte {
 	private int numeroSalleDecisive;
 	private Random rand = new Random();
 	
-	@SuppressWarnings("unchecked")
-	public void ajouterSalle(ZoneDeCombat zoneDeCombat, Monstre<? extends Pouvoir>... monstre) {
+	public void ajouterSalle(ZoneDeCombat zoneDeCombat, Monstre<? extends Pouvoir>... monstre) throws ZoneDeCombatNonCompatibleException {
 		Salle newSalle = new Salle(planGrotte.size() + 1, zoneDeCombat);
 		Bataille newBataille = new Bataille();
 		
 		for(Monstre<? extends Pouvoir> m : monstre) {
-			newBataille.ajouter(m);
+			if (m.getZoneDeCombat() != zoneDeCombat) {
+				throw new ZoneDeCombatNonCompatibleException(zoneDeCombat, m.getZoneDeCombat());
+			} else {
+				newBataille.ajouter(m);
+			}
+
 		}
 		planGrotte.put(newSalle, new ArrayList<>());
 		batailles.put(newSalle, newBataille);

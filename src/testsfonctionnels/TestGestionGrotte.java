@@ -20,7 +20,7 @@ import protagoniste.ZoneDeCombat;
 public class TestGestionGrotte {
 
 	@SuppressWarnings("unchecked")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Monstre<Feu> dragotenebre = new Monstre<>("dragotenebre", 200, ZoneDeCombat.AERIEN, Domaine.FEU,
 				new BouleDeFeu(4), new Lave(1), new Eclair(3));
 
@@ -52,7 +52,7 @@ public class TestGestionGrotte {
 
 		Grotte grotte = new Grotte();
 
-		grotte.ajouterSalle(ZoneDeCombat.TERRESTRE, guillotimort);
+		grotte.ajouterSalle(ZoneDeCombat.AQUATIQUE, guillotimort);
 		grotte.ajouterSalle(ZoneDeCombat.AERIEN, dragotenebre);
 		grotte.ajouterSalle(ZoneDeCombat.TERRESTRE, cramombre);
 		grotte.ajouterSalle(ZoneDeCombat.TERRESTRE, givrogolem);
