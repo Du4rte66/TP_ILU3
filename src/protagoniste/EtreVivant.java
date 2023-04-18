@@ -49,4 +49,8 @@ public abstract class EtreVivant implements Comparable<EtreVivant> {
 	public int hashCode() {
 		return 31 * (this.forceDeVie + this.nom.hashCode() + this.bataille.hashCode()); 
 	}
+	
+	public boolean enVie() {
+		return forceDeVie > 0;
+	}
 }

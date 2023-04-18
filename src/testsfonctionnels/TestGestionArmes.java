@@ -60,6 +60,18 @@ public class TestGestionArmes {
 		bataille.ajouter(guillotimort);
 		List<Homme> campHomme3 = compagnie.choixDuCamp(bataille);
 		System.out.println("Le camps des hommes pour combattre un guillotimort (Terrestre, 80) : \n" + campHomme3);
+	
+		System.out.println("\n\n****** TP6 *****");
+		LancePierre lancePierre = new LancePierre();
+		Boomerang boomerang = new Boomerang();
+		Arc arc1 = new Arc(3);
+		Arc arc2 = new Arc(1);
+		System.out.println("lance-pierre < boomerang ? " + lancePierre.isAfter(boomerang));
+		System.out.println("arc1 = arc2 ? " + arc1.isSameAs(arc2));
+		System.out.println("arc2 tire sa seule flèche est n'est plus opérationnel");
+		arc2.utiliser();
+		System.out.println("arc1 = arc2 ? " + arc1.isSameAs(arc2));
+		System.out.println("arc1 > arc2 ? " + arc1.isBefore(arc2));
 	}
 //		RESULTAT ATTENDU
 //		Le camps des hommes pour combattre un aqualave (Aquatique, 30) : 

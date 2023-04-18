@@ -6,7 +6,7 @@ import java.util.Set;
 
 import protagoniste.ZoneDeCombat;
 
-public abstract class Arme extends ForceDeCombat implements Comparable<Arme>{
+public abstract class Arme extends ForceDeCombat implements Orderable<Arme>{
 	private Set<ZoneDeCombat> zonesDeCombat = new HashSet<>();
 	
 	protected Arme(int pointDeDegat, String nom, ZoneDeCombat... zonesDeCombat) {
@@ -19,7 +19,8 @@ public abstract class Arme extends ForceDeCombat implements Comparable<Arme>{
 	public Set<ZoneDeCombat> getZonesDeCombat() {
 		return zonesDeCombat;
 	}
-
+	
+	@Override
 	public int compareTo(Arme armeAComparer) {
 		int comparaison = 0;
 		if(this.isOperationnel() && armeAComparer.isOperationnel()) {

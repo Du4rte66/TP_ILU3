@@ -30,4 +30,15 @@ public abstract class Pouvoir extends ForceDeCombat {
 	public int getNbUtilisationPouvoir() {
 		return this.nbUtilisationPouvoir;
 	}
+	
+	public String afficherPouvoir() {
+		StringBuilder affichage = new StringBuilder();
+		if(!operationnel) {
+			affichage.append("Il ne pourra plus utiliser "+ getNom() + " pendant longtemps");
+		} else {
+			affichage.append("Il peut encore utiliser ce pouvoir "+ nbUtilisationPouvoir + " fois.");
+		}
+		
+		return affichage.toString();
+	}
 }

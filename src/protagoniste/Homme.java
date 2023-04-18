@@ -5,6 +5,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableSet;
+import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -111,5 +112,31 @@ public class Homme extends EtreVivant{
 			return this.getNom().compareTo(hommeToCompare.getNom());
 		}
 		return -99;
+	}
+	
+	public int subitAttaque(int degat) {
+		forceDeVie -= degat;
+		if(forceDeVie < 1) {
+			mourir();
+		}
+		return forceDeVie;
+		
+	}
+	
+	public boolean attaqueReussie() {
+		Random rand = new Random();
+		int randVal = rand.nextInt(21);
+		return randVal < 10;
+	}
+	
+	public boolean attaqueMonstre(Monstre<?> monstre) {
+		boolean attaqueReussie = attaqueReussie();
+		int pointDeDegat = armeChoisie.utiliser();
+		
+		if(attaqueReussie) {
+			monstre.subitAttaque(pointDeDegat);
+		}
+		
+		return attaqueReussie;
 	}
 }

@@ -43,6 +43,10 @@ public class HistoireFantaisie {
 	private GroupeHommes groupeHommes = new GroupeHommes();
 	private Salle salle;
 	private Grotte grotte = new Grotte();
+	
+	public HistoireFantaisie(Livre livre) {
+		this.livre = livre;
+	}
 
 	public void initialisationParDefaut(HistoireFantaisie histoireFantaisie) {
 		// Affectation de la sortie (ecran ou fichier)
@@ -180,15 +184,22 @@ public class HistoireFantaisie {
 		Map<String, List<Monstre<? extends Pouvoir>>> livreMonstres = new HashMap<>(monstres);
 		
 	}
+	
+	public void afficherLesMonstres() {
+		String resultat = "";
+		for(String nom : monstres.keySet())
+			resultat +=  nom + ", ";
+		livre.ecrire(resultat);
+	}
 
 	public static void main(String[] args) {
-		
-		HistoireFantaisie histoireFantaisie = new HistoireFantaisie();
+		Livre livre = new Ecran();
+		HistoireFantaisie histoireFantaisie = new HistoireFantaisie(livre);
 		// Initialisation par defaut
 		histoireFantaisie.initialisationParDefaut(histoireFantaisie);
 		// Début de l'affrontement
 		histoireFantaisie.ecrireHistoire();
-
+		histoireFantaisie.afficherLesMonstres();
 	}
 
 }

@@ -20,13 +20,18 @@ public class GroupeHommes {
 		Collections.addAll(groupe, hommes);
 	}
 	
+
 	private static class ComparateurHommes implements Comparator<Homme>{
-        public int compare(Homme homme1, Homme homme2) {
-            int comp = homme2.getForceDeVie() - homme1.getForceDeVie();
-            if (comp == 0) {
-                return homme1.getNom().compareTo(homme2.getNom());
+        public ComparateurHommes() {
+            super();
+        }
+
+        public int compare(Homme h1, Homme h2) {
+            int result = h2.getForceDeVie() - h1.getForceDeVie();
+            if (result == 0) {
+                return h1.getNom().compareTo(h2.getNom());
             }
-            return comp;
+            return result;
         }
     }
 	
@@ -90,5 +95,9 @@ public class GroupeHommes {
 		}
 		
 		return hommesChoisis;
+	}
+	
+	public void supprimerHomme(Homme homme) {
+		groupe.remove(homme);
 	}
 }
