@@ -22,12 +22,10 @@ public abstract class Arme extends ForceDeCombat implements Orderable<Arme>{
 	
 	@Override
 	public int compareTo(Arme armeAComparer) {
-		int comparaison = 0;
-		if(this.isOperationnel() && armeAComparer.isOperationnel()) {
-			comparaison = armeAComparer.getPointDeDegat() - getPointDeDegat();
-		}
+		int comparaison = this.getNom().compareTo(armeAComparer.getNom());
 		if(comparaison == 0) {
-			comparaison = getNom().compareTo(armeAComparer.getNom());
+			Boolean b = armeAComparer.isOperationnel();
+			return b.compareTo(this.isOperationnel());
 		}
 		return comparaison;
 	}

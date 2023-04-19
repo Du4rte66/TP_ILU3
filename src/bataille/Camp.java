@@ -32,12 +32,16 @@ public class Camp<E extends EtreVivant> implements Iterable<E> {
 	}
 	
 	public int nbCombattants() {
-		  return liste.size();
-		}
+		return liste.size();
+	}
 
 	public E selectionner() {
 		Random randomGenerateur = new Random();
 		int numeroCombattant = randomGenerateur.nextInt(liste.size());
 		return liste.get(numeroCombattant);
+	}
+	
+	public boolean estVide() {
+		return liste.isEmpty();
 	}
 }

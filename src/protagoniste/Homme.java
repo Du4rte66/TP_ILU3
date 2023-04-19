@@ -139,4 +139,8 @@ public class Homme extends EtreVivant{
 		
 		return attaqueReussie;
 	}
+
+	public boolean resteArmeUtile() {
+		return armes.isEmpty();
+	}
 }

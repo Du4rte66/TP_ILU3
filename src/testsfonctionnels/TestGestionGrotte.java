@@ -52,7 +52,8 @@ public class TestGestionGrotte {
 
 		Grotte grotte = new Grotte();
 
-		grotte.ajouterSalle(ZoneDeCombat.AQUATIQUE, guillotimort);
+		//grotte.ajouterSalle(ZoneDeCombat.AQUATIQUE, guillotimort);
+		grotte.ajouterSalle(ZoneDeCombat.TERRESTRE, guillotimort);
 		grotte.ajouterSalle(ZoneDeCombat.AERIEN, dragotenebre);
 		grotte.ajouterSalle(ZoneDeCombat.TERRESTRE, cramombre);
 		grotte.ajouterSalle(ZoneDeCombat.TERRESTRE, givrogolem);

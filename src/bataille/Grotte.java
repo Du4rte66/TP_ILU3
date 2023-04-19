@@ -102,13 +102,11 @@ public class Grotte {
 		return salle.getNumSalle() == numeroSalleDecisive;
 	}
 	
-
 	public Salle premiereSalle() {
 		Salle salle = trouverSalle(1);
 		sallesExplorees.add(salle);
 		return salle;
 	}
-	
 	
 	public Salle salleSuivante(Salle salleAQuitter) {
 		List<Salle> salleAccessible = new ArrayList<>(planGrotte.get(salleAQuitter));
@@ -123,6 +121,10 @@ public class Grotte {
 		sallesExplorees.add(salleT);
 		
 		return salleT;
+	}
+
+	public Bataille bataille(Salle salle) {
+		return this.batailles.get(salle);
 	}
 
 }

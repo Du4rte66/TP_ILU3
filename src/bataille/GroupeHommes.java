@@ -16,22 +16,26 @@ import protagoniste.Monstre;
 public class GroupeHommes {
 	private NavigableSet<Homme> groupe = new TreeSet<>();
 	
+//	private NavigableSet<Homme> groupe = new TreeSet<>(
+//			(homme1, homme2) -> {
+//			int comp = homme2.getForceDeVie() - homme1.getForceDeVie();
+//            if (comp == 0) {
+//                return homme1.getNom().compareTo(homme2.getNom());
+//            }
+//            return comp;});
+	
+	
 	public void ajouterHommes(Homme... hommes) {
 		Collections.addAll(groupe, hommes);
 	}
 	
-
 	private static class ComparateurHommes implements Comparator<Homme>{
-        public ComparateurHommes() {
-            super();
-        }
-
-        public int compare(Homme h1, Homme h2) {
-            int result = h2.getForceDeVie() - h1.getForceDeVie();
-            if (result == 0) {
-                return h1.getNom().compareTo(h2.getNom());
+        public int compare(Homme homme1, Homme homme2) {
+            int comp = homme2.getForceDeVie() - homme1.getForceDeVie();
+            if (comp == 0) {
+                return homme1.getNom().compareTo(homme2.getNom());
             }
-            return result;
+            return comp;
         }
     }
 	
@@ -99,5 +103,13 @@ public class GroupeHommes {
 	
 	public void supprimerHomme(Homme homme) {
 		groupe.remove(homme);
+	}
+
+	public boolean estVide() {
+		return groupe.isEmpty();
+	}
+
+	public boolean resteCombattant() {
+		return !groupe.isEmpty();
 	}
 }

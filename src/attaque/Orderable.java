@@ -5,9 +5,9 @@ public interface Orderable<T> extends Comparable<T> {
 		return compareTo(other) > 0;
 	}
 	default boolean isBefore(T other) {
-		return compareTo(other) == 0;
+		return compareTo(other) < 0;
  	}
 	default boolean isSameAs(T other) {
-		return compareTo(other) < 0;
+		return compareTo(other) == 0;
 	}
 } 
