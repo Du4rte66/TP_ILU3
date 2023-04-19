@@ -224,7 +224,7 @@ public class HistoireFantaisie {
 	private void hommeAttaque(Camp<Monstre<? extends Pouvoir>> campMonstres, List<Homme> groupeHumain) {
 		Homme homme = selectionHomme(groupeHumain);
 		Monstre<? extends Pouvoir> m = campMonstres.selectionner();
-		Arme a = homme.getArmeChoisie();
+		Arme arme = homme.getArmeChoisie();
 		boolean attaqueReussi = homme.attaqueMonstre(m);
 		System.out.println("\n"+homme.getNom()+" attaque "+m.getNom()+" avec son "+homme.getArmeChoisie().getNom());
 		if (attaqueReussi){
@@ -232,8 +232,8 @@ public class HistoireFantaisie {
 		}else {
 			System.out.println("mais il le manque de peu");
 		}
-		if (!a.isOperationnel()) {
-			System.out.println("\n" + homme.getNom() + " ne peut plus utiliser son " + a.getNom());
+		if (!arme.isOperationnel()) {
+			System.out.println("\n" + homme.getNom() + " ne peut plus utiliser son " + arme.getNom());
 			if (!homme.resteArmeUtile()) {
 				System.out.println("\nN'ayant plus d'arme adaptée il quitte le champs de bataille");
 				groupeHumain.remove(homme);
