@@ -188,8 +188,8 @@ public class HistoireFantaisie {
 	
 	private String affichageHommes(List<Homme> groupeHumain) {
 		String chaine = "";
-		for (Homme h : groupeHumain) {
-			chaine+="\n-"+h.getNom()+" possédant "+h.getForceDeVie()+" points de force de vie et armé avec "+h.getArmeChoisie();
+		for (Homme homme : groupeHumain) {
+			chaine += "\n-" + homme.getNom() + " possédant " + homme.getForceDeVie() + " points de force de vie et armé avec " + homme.getArmeChoisie();
 		}
 		return chaine;
 		
@@ -223,10 +223,10 @@ public class HistoireFantaisie {
 	
 	private void hommeAttaque(Camp<Monstre<? extends Pouvoir>> campMonstres, List<Homme> groupeHumain) {
 		Homme homme = selectionHomme(groupeHumain);
-		Monstre<? extends Pouvoir> m = campMonstres.selectionner();
+		Monstre<? extends Pouvoir> monstre = campMonstres.selectionner();
 		Arme arme = homme.getArmeChoisie();
-		boolean attaqueReussi = homme.attaqueMonstre(m);
-		System.out.println("\n"+homme.getNom()+" attaque "+m.getNom()+" avec son "+homme.getArmeChoisie().getNom());
+		boolean attaqueReussi = homme.attaqueMonstre(monstre);
+		System.out.println("\n" + homme.getNom() + " attaque " + monstre.getNom() + " avec son " + homme.getArmeChoisie().getNom());
 		if (attaqueReussi){
 			System.out.println("et il le touche.");
 		}else {
@@ -238,7 +238,7 @@ public class HistoireFantaisie {
 				System.out.println("\nN'ayant plus d'arme adaptée il quitte le champs de bataille");
 				groupeHumain.remove(homme);
 			} else {
-				homme.choisirArme(m);
+				homme.choisirArme(monstre);
 			}
 		}
 	}
@@ -249,20 +249,20 @@ public class HistoireFantaisie {
 	}
 
 	private void monstreAttaque(Camp<Monstre<? extends Pouvoir>> campMonstres, List<Homme> groupeHumain) {
-		Monstre<? extends Pouvoir> m = campMonstres.selectionner();
-		Homme h = selectionHomme(groupeHumain);
-		Pouvoir pouvoir = m.attaque();
+		Monstre<? extends Pouvoir> monstre = campMonstres.selectionner();
+		Homme homme = selectionHomme(groupeHumain);
+		Pouvoir pouvoir = monstre.attaque();
 		if (pouvoir != null) {
-			boolean attaqueReussi = m.attaqueHomme(h, pouvoir);
-			System.out.println("\n"+m.getNom()+" attaque "+h.getNom()+" avec "+pouvoir.getNom());
+			boolean attaqueReussi = monstre.attaqueHomme(homme, pouvoir);
+			System.out.println("\n" + monstre.getNom()+" attaque " + homme.getNom()+" avec " + pouvoir.getNom());
 			String chaine = pouvoir.afficherPouvoir();
 			if (attaqueReussi) {
 				System.out.println("et le touche.");
-				System.out.println("\n"+chaine);
-				if (!h.enVie()) {
-					System.out.println("\nMalheureusement "+h.getNom()+" ne survit pas à ses blessures.");
-					groupeHumain.remove(h);
-					groupeHommes.supprimerHomme(h);
+				System.out.println("\n" + chaine);
+				if (!homme.enVie()) {
+					System.out.println("\nMalheureusement " + homme.getNom() + " ne survit pas à ses blessures.");
+					groupeHumain.remove(homme);
+					groupeHommes.supprimerHomme(homme);
 				}
 			}else {
 				System.out.println("mais heureseument il le loupe.");
@@ -278,8 +278,8 @@ public class HistoireFantaisie {
 				System.out.println(", mais ce n'était pas les seuls du groupe des humains à être armés pour combattre.");
 				System.out.println(affichageHommes(groupeCombattants));
 				System.out.println("\nMalheureseument le monstre a pu régénérer ses pouvoirs");
-				Monstre<? extends Pouvoir> m = campMonstres.selectionner();
-				System.out.println("\nLe combat contre "+m.getNom()+" continue.");
+				Monstre<? extends Pouvoir> monstre = campMonstres.selectionner();
+				System.out.println("\nLe combat contre " + monstre.getNom() + " continue.");
 				debutCombat(campMonstres, groupeCombattants, bataille);
 			}else {
 				System.out.println("et aucun autre homme n'est armé pour combattre.");
@@ -341,7 +341,7 @@ public class HistoireFantaisie {
 	public void afficherLesMonstres() {
 		String resultat = "";
 		for(String nom : monstres.keySet())
-			resultat +=  nom + ", ";
+			resultat += nom + ", ";
 		livre.ecrire(resultat);
 	}
 
